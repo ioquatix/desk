@@ -2,6 +2,7 @@
 use <wood.scad>;
 
 height = 1070;
+thickness = 20;
 
 module room() {
 	translate([-3300/2, -400, 0])
@@ -12,20 +13,28 @@ module room() {
 	}
 }
 
-room();
+//room();
 
-module monitors() {
-	translate([3300 * (1/6), -300, 430]) {
-		rotate([0, 0, -30]) translate([-720, -200, 0]) cube([730, 30, 430], true);
-		cube([730, 30, 430], true);
-		rotate([0, 0, 30]) translate([720, -200, 0]) cube([730, 30, 430], true);
-	}
+module monitor() {
+	translate([0, -30/2 - 127, 0])
+	cylinder(d=40, h=392);
 	
-	translate([3300 * (-2/6), -300, 430])
+	translate([0, 0, 392 - 20])
 	cube([730, 30, 430], true);
 }
 
-translate([0, 0, height])
+module monitors() {
+	translate([3300 * (1/6), -200, 0]) {
+		rotate([0, 0, -30]) translate([-720, -200, 0]) monitor();
+		monitor();
+		rotate([0, 0, 30]) translate([720, -200, 0]) monitor();
+	}
+	
+	translate([3300 * (-2/6), -200, 0])
+	monitor();
+}
+
+translate([0, 80, height+thickness])
 monitors();
 
 module levels() {
@@ -68,3 +77,19 @@ translate([-2600/2, -450/2, height-950]) {
 translate([-3000/2, -600/2, height]) {
 	panel(3000);
 }
+
+module reflect(axis) {
+	children();
+	mirror(axis) children();
+}
+
+module human() {
+	// scale([1, 0.5, 1])
+	// cylinder(d=400, h=1860);
+	
+	color("white")
+	reflect([1, 0, 0]) translate([-40, -100, 1700])
+	sphere(d=40);
+}
+
+translate([3300 * (1/6), 400, 0]) human();
