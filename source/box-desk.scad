@@ -13,7 +13,7 @@ module room() {
 	}
 }
 
-//room();
+room();
 
 module monitor() {
 	translate([0, -30/2 - 127, 0])
@@ -23,15 +23,15 @@ module monitor() {
 	cube([730, 30, 430], true);
 }
 
-module monitors() {
-	translate([3300 * (1/6), -200, 0]) {
-		rotate([0, 0, -30]) translate([-720, -200, 0]) monitor();
-		monitor();
-		rotate([0, 0, 30]) translate([720, -200, 0]) monitor();
-	}
+module monitors(width = 2500) {
+	translate([width/2 * (4/20), -200, 0]) monitor();
+	translate([width/2 * (18/20), -200, 0]) monitor();
 	
-	translate([3300 * (-2/6), -200, 0])
-	monitor();
+	translate([width/2 * (-11/21), -200, 0]) monitor();
+	translate([width/2 * (-21/20), -200+260, 0]) rotate([0, 0, -45]) monitor();
+	
+	// translate([width/2 * (11/21), -200, 0]) monitor();
+	// translate([width/2 * (21/20), -200+260, 0]) rotate([0, 0, 45]) monitor();
 }
 
 translate([0, 80, height+thickness])
@@ -84,12 +84,12 @@ module reflect(axis) {
 }
 
 module human() {
-	// scale([1, 0.5, 1])
-	// cylinder(d=400, h=1860);
+	scale([1, 0.5, 1])
+	cylinder(d=400, h=1860);
 	
 	color("white")
 	reflect([1, 0, 0]) translate([-40, -100, 1700])
 	sphere(d=40);
 }
 
-translate([3300 * (1/6), 400, 0]) human();
+translate([3300 * (1/6), 500, 0]) human();
