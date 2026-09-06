@@ -1,7 +1,7 @@
 
 use <wood.scad>;
 
-height = 1070;
+height = 1100;
 thickness = 20;
 
 module room() {
@@ -40,20 +40,20 @@ monitors();
 module levels() {
 	translate([0, 0, height-300]) children();
 	translate([0, 0, height-950]) children();
-	translate([0, 0, height]) children();
+	translate([0, 0, height-20]) children();
 }
 
-module box() {
-	translate([-100, 0, 0]) {
+module box(width = 190) {
+	translate([-width/2, 0, 0]) {
 		translate([0,-250, 0])
-		cube([200, 20, height]);
+		wcube([190, 20, height-20]);
 		
 		translate([0,250-20, 0])
-		cube([200, 20, height]);
+		wcube([190, 20, height-20]);
 		
 		levels()
 		translate([0,-250+20, -20])
-		cube([200, 500-20-20, 20]);
+		wcube([190, 500-20-20, 20]);
 	}
 }
 
@@ -74,7 +74,7 @@ translate([-2600/2, -450/2, height-950]) {
 	panel(2600, width=450);
 }
 
-translate([-3000/2, -600/2, height]) {
+translate([-3000/2, -600/2, height-20]) {
 	panel(3000);
 }
 

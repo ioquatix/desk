@@ -3,17 +3,22 @@ $t = 20;
 
 function odd(x) = (x % 2) == 1;
 
+module wcube(size = [100, 100, 100]) {
+	echo("wcube", size);
+	color([0.8, 0.4, 0.1])
+	cube(size);
+}
+
 module beam(length = 1200, width = 42, depth = 42) {
-	echo("beam", [length, width, depth]);
 	cube([width, depth, length]);
 }
 
 module plank(length, width = 200, thickness = $t) {
-	echo("plank", [length, width, thickness]);
 	cube([length, width, thickness]);
 }
 
 module panel(length, width = 600, thickness = $t) {
+	echo("panel", length, width, thickness);
 	plank_width = width / 6;
 	count = floor(width / plank_width);
 	
